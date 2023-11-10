@@ -1,0 +1,21 @@
+@import "../../styles/variables";
+
+.container {
+  .containerHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: $color-cream-text;
+    padding: 10px;
+
+    .closeIcon {
+      cursor: pointer;
+      margin-right: 5px;
+
+      &:hover {
+        color: $colors-base-red;
+        transform: scale(1.2);
+      }
+    }
+  }
+}

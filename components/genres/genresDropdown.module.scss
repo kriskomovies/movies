@@ -1,0 +1,40 @@
+@import "../../styles/variables";
+
+.container {
+  a {
+    text-decoration: none;
+  }
+
+  .button {
+    color: $color-cream-text;
+    background-color: $color-base-blue;
+
+    &:hover {
+      background-color: $color-base-blue;
+      transform: scale(1.2);
+    }
+
+    span {
+      font-size: 1rem;
+    }
+  }
+}
+
+
+.genreContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background-color: $color-base-grey;
+
+  .genre {
+    color: $color-cream-text;
+    margin: 5px;
+  }
+
+  .genre:hover {
+    cursor: pointer;
+    color: $colors-base-red;
+    background-color: $color-base-blue;
+  }
+}
+

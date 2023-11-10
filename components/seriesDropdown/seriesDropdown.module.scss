@@ -1,0 +1,43 @@
+@import "../../styles/variables";
+
+.container {
+  a {
+    text-decoration: none;
+  }
+
+  .button {
+    color: $color-cream-text;
+    background-color: $color-base-blue;
+    width: 300px;
+    margin: 20px;
+
+    span {
+      font-size: 1rem;
+    }
+  }
+}
+
+.seasonContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  background-color: $color-base-grey;
+  height: 150px;
+  width: 300px;
+  overflow: auto;
+
+  .season {
+    color: $color-cream-text;
+    padding: 15px;
+    border-top: 1px solid $color-base-blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .season:hover {
+    cursor: pointer;
+    color: $colors-base-red;
+    background-color: $color-base-blue;
+  }
+}
+

@@ -1,0 +1,8 @@
+@import "../../styles/variables";
+
+.layout {
+    overflow: hidden;
+    margin-top: 100px;
+    background-color: $color-base-grey;
+    min-height: calc(100vh - 100px);
+}
