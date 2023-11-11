@@ -20,9 +20,12 @@
     align-items: center;
     justify-content: center;
     background-color: black;
+    padding: 10px 0;
+
     .moviePlayer {
-      height: 500px;
+      height: 650px;
       width: 1200px;
+      padding: 20px;
 
       img {
         width: 100%;

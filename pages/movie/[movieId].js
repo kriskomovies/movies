@@ -10,9 +10,10 @@ import {moviesSliderSettings} from "@/lib/settings";
 import styles from "./movie.module.scss";
 
 
+
 function MovieDetailPage({movie, episodes, seasons}) {
     const router = useRouter();
-    const {name, description, poster, genres, season, episode} = movie;
+    const {name, description, poster, genres, season, episode, vidPlayer} = movie;
 
     async function handleSeasonSelect(season) {
         const response = await axios.get(`/api/serie/?name=${name}&season=${season}`);
@@ -24,7 +25,12 @@ function MovieDetailPage({movie, episodes, seasons}) {
         <div className={styles.movieDetailsWrapper}>
             <div className={styles.moviePlayerWrapper}>
                 <div className={styles.moviePlayer}>
-                    <img src={poster} alt={'test'}/>
+                    <iframe
+                        allowFullScreen={true}
+                        src={vidPlayer}
+                        width="100%"
+                        height="100%"
+                    />
                 </div>
             </div>
             <div className={styles.movieName}>
@@ -69,6 +75,7 @@ export async function getServerSideProps(context) {
     const {movieId} = context.params
 
     const movie = await getMovieById(movieId);
+
     return {
         props: {
             ...JSON.parse(JSON.stringify(movie))

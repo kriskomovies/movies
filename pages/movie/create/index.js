@@ -2,11 +2,11 @@ import {useState} from "react";
 import {Button, TextField, FormControl, InputLabel, Select, MenuItem} from "@mui/material";
 import {ANIME, MOVIE, SERIE} from "@/constants/moviesTypes";
 import axios from "axios";
-
+import {EMPTY_STRING} from "@/lib/helpers";
 import {isMovieOkForDb} from "@/lib/movies";
 
 import styles from "./createMovie.module.scss";
-import {EMPTY_STRING} from "@/lib/helpers";
+
 
 const initialFormData = {
     name: EMPTY_STRING,
@@ -22,7 +22,7 @@ const initialFormData = {
     seasonName: EMPTY_STRING,
     episode: 0,
     episodeName: EMPTY_STRING,
-    netuPlayer: EMPTY_STRING,
+    vidPlayer: EMPTY_STRING,
     voePlayer: EMPTY_STRING
 };
 
@@ -128,9 +128,9 @@ function CreateMovie(props) {
                 </div>
                 <TextField
                     className={styles.textField}
-                    name="netuPlayer"
-                    label="Netu Player"
-                    value={formData.netuPlayer}
+                    name="vidPlayer"
+                    label="Vid Player"
+                    value={formData.vidPlayer}
                     onChange={handleChange}
                 />
                 <TextField

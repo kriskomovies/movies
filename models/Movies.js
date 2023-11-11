@@ -15,7 +15,7 @@ const MoviesSchema = new mongoose.Schema({
     poster: {
         type: String
     },
-    netuPlayer: {
+    vidPlayer: {
         type: String
     },
     voePlayer: {
@@ -54,6 +54,5 @@ const MoviesSchema = new mongoose.Schema({
     }
 })
 
-// Create a text index on the 'name' field
 MoviesSchema.index({name: 'text'});
 export default mongoose.models.Movies || mongoose.model('Movies', MoviesSchema, "Movies")
