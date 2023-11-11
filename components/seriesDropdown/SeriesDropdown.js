@@ -9,7 +9,6 @@ export default function SeriesDropdown({seasons, currentSeason, handleSeasonSele
     const ref = useRef();
 
     function handleClick(event) {
-        event.stopPropagation();
         setAnchorEl(event.currentTarget);
     }
 
@@ -52,6 +51,7 @@ export default function SeriesDropdown({seasons, currentSeason, handleSeasonSele
                 open={open}
                 anchorEl={anchorEl}
                 onClose={handleClose}
+                disableScrollLock={ true }
                 anchorOrigin={{
                     vertical: 'bottom',
                     horizontal: 'left',

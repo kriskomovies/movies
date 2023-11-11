@@ -3,10 +3,11 @@ import {useDispatch, useSelector,} from "react-redux";
 import {debounce} from "lodash";
 import {selectSearchString, setSearchString} from "@/slices/searchSlice";
 import SearchIcon from "@mui/icons-material/Search";
-import { useOnClickOutside } from 'usehooks-ts'
+import {useOnClickOutside} from 'usehooks-ts'
 import {EMPTY_STRING} from "@/lib/helpers";
 
 import styles from "./searchBar.module.scss";
+
 export default function SearchBar() {
     const sliceSearchTerm = useSelector(selectSearchString);
     const dispatch = useDispatch();
@@ -24,7 +25,7 @@ export default function SearchBar() {
         };
     }, []);
 
-    function handleClickOutside(){
+    function handleClickOutside() {
         setFocusedSearch(false);
     }
 
@@ -53,14 +54,17 @@ export default function SearchBar() {
 
     return (
         <div className={styles.searchBar} ref={ref}>
-            <input
-                autoFocus
-                id="search-input"
-                className={focusedSearch ? styles.activeInput : ''}
-                placeholder="I am looking for..."
-                onChange={handleInputChange}
-                value={searchValue}
-            />
+            <div className={styles.inputContainer}>
+                <input
+                    autoFocus
+                    id="search-input"
+                    className={focusedSearch ? styles.activeInput : ''}
+                    placeholder="I am looking for..."
+                    onChange={handleInputChange}
+                    value={searchValue}
+                />
+            </div>
+
             <div className={styles.searchIcon}
                  onClick={(e) => onSearchIconClick(e)}
             >

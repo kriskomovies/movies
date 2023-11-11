@@ -1,55 +1,67 @@
 @import "../../styles/variables";
 
 .navbar {
-    background-color: $colors-base-black;
-    color: white;
-    font-size: 1rem;
-    padding: 25px 0;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 100;
+  position: fixed;
+  top: 0;
+  padding: 25px 0;
+  width: 100%;
+  z-index: 100;
+  background-color: $colors-base-black;
+  color: white;
+  font-size: 1rem;
 
-    .container {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        height: 50px;
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+    max-width: 97vw;
+    padding-right: 10px;
+  }
+
+  .leftSide {
+    display: flex;
+    align-items: center;
+
+    a {
+      margin-right: 30px;
     }
 
-    .leftSide {
-        display: flex;
-        align-items: center;
-
-        a {
-            margin-right: 30px;
-        }
-
-        .activeLink {
-            color: $colors-base-red !important;
-        }
+    .activeLink {
+      color: $colors-base-red !important;
     }
+  }
 
-    .dropDown {
-        margin-left: -240px;
-    }
+  .dropDown {
+    margin-left: -240px;
+  }
 }
 
 @media screen and (max-width: 1200px) {
-    .dropDown {
-        margin-left: 0 !important;
-    }
+  .dropDown {
+    margin-left: 0 !important;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .container {
+    max-width: 95vw !important;
+  }
 }
 
 @media screen and (max-width: 600px) {
-    .leftSide {
+  .container {
+    max-width: 90vw !important;
+  }
 
-        a {
-            margin-right: 10px !important;
-        }
+  .leftSide {
 
-        .activeLink {
-
-        }
+    a {
+      margin-right: 10px !important;
     }
+
+    .activeLink {
+
+    }
+  }
 }

@@ -29,9 +29,7 @@ export default function Navbar() {
                 <div className={styles.dropDown}>
                     <GenresDropdown/>
                 </div>
-                <div>
-                    <SearchBar/>
-                </div>
+                <SearchBar/>
             </div>
         </div>
     )

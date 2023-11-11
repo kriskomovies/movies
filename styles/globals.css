@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css');
+
+html,
+body {
+    scrollbar-gutter: stable;
+    padding: 0 !important;
+    margin: 0;
+    font-family: 'Comfortaa', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: #C2C2C2;
+
+    &:visited {
+        text-decoration: none;
+    }
+}
