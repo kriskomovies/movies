@@ -5,10 +5,6 @@ import MoviesGridWrapper from "@/components/moviesGridWrapper/MoviesGridWrapper"
 
 import styles from "./movies.module.scss"
 
-export const config = {
-    runtime: 'experimental-edge', // warn: using an experimental edge runtime, the API might change
-}
-
 export default function Movies({serverMovies, totalCount, type}) {
     const [page, setPage] = useState(1);
     const getMore = useGetMoviesByTypeQuery({type: type, page}, {skip: page === 1});
@@ -31,8 +27,7 @@ export default function Movies({serverMovies, totalCount, type}) {
 export async function getServerSideProps(context) {
     const {type} = context.query;
     const {movies, totalCount} = await getMoviesByType(type);
-
-
+    console.log("movies", movies)
     return {
         props: {
             serverMovies: JSON.parse(JSON.stringify(movies)),
