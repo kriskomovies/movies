@@ -25,6 +25,10 @@ export default function Movies({serverMovies, totalCount, type}) {
 }
 
 export async function getServerSideProps(context) {
+    context.res.setHeader(
+        "Cache-Control",
+        "public, s-maxage=1800, stale-while-revalidate=86400"
+    );
     const {type} = context.query;
     const {movies, totalCount} = await getMoviesByType(type);
     console.log("movies", movies)

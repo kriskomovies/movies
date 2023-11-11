@@ -3,9 +3,6 @@ import {Movies, Genres} from "@/models"
 import dbConnect from "@/lib/dbConnect";
 import {getGenreQuery, getTypeQuery} from "@/lib/queries";
 
-export const config = {
-    runtime: 'experimental-edge',
-}
 // export async function getAllMovies() {
 //     try {
 //         await dbConnect();
