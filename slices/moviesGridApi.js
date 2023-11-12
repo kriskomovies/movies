@@ -19,7 +19,14 @@ export const moviesGridApi = createApi({
             },
 
         }),
+        getMoviesBySearch: builder.query({
+            query: (searchString) => {
+                console.log("searchString", searchString)
+                return `movies?searchString=${searchString}`
+            },
+
+        }),
     }),
 })
 
-export const {useGetMoviesByTypeQuery, useGetMoviesByGenreQuery} = moviesGridApi
+export const {useGetMoviesByTypeQuery, useGetMoviesByGenreQuery, useGetMoviesBySearchQuery} = moviesGridApi
