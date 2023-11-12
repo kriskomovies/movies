@@ -4,6 +4,7 @@ import store from "../stores/store";
 import WrapperComponent from "@/components/wrapperComponent/WrapperComponent";
 import "./globals.css";
 
+export const runtime = 'edge'
 export default function App({Component, pageProps}) {
     return (
         <Layout>
