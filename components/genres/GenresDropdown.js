@@ -74,8 +74,8 @@ export default function GenresDropdown(props) {
                 onClose={handleClose}
                 disableScrollLock={ true }
                 anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left',
+                    vertical: 'bottom',
+                    horizontal: 'center',
                 }}
                 transformOrigin={{
                     vertical: 'center',
