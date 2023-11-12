@@ -1,4 +1,3 @@
-import React from "react";
 import Slider from "react-slick";
 import ItemPopover from "@/components/itemPopover/ItemPopover";
 
@@ -10,7 +9,7 @@ export default function Carousel({movies, settings, hasPlayer= true, hasName = f
             return (
                 <ItemPopover
                     key={movie._id}
-                    item={movie}
+                    movie={movie}
                     hasPlayer={hasPlayer}
                     hasName={hasName}
                 />

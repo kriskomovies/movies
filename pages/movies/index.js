@@ -4,6 +4,7 @@ import {useGetMoviesByTypeQuery} from "@/slices/moviesGridApi";
 import MoviesGridWrapper from "@/components/moviesGridWrapper/MoviesGridWrapper";
 
 import styles from "./movies.module.scss"
+import axios from "axios";
 
 export default function Movies({serverMovies, totalCount, type}) {
     const [page, setPage] = useState(1);
@@ -25,13 +26,8 @@ export default function Movies({serverMovies, totalCount, type}) {
 }
 
 export async function getServerSideProps(context) {
-    context.res.setHeader(
-        "Cache-Control",
-        "public, s-maxage=1800, stale-while-revalidate=86400"
-    );
     const {type} = context.query;
     const {movies, totalCount} = await getMoviesByType(type);
-    console.log("movies", movies)
     return {
         props: {
             serverMovies: JSON.parse(JSON.stringify(movies)),

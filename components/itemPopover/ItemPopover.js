@@ -1,21 +1,38 @@
 import {useRef, useState} from "react";
-import {Popover} from "@mui/material";
+import {useDispatch} from "react-redux";
+import {useRouter} from "next/router";
+import {setSearchString} from "@/slices/searchSlice";
+import Popover from "@mui/material/Popover";
 import CarouselItem from "@/components/carousel/item/CarouselItem";
 import HoveredMovie from "@/components/hoveredMovie/HoveredMovie";
 
 import styles from "./itemPopover.module.scss";
 
-export default function ItemPopover({item, hasPlayer = true, hasName = false}) {
+
+
+export default function ItemPopover({movie, hasPlayer = true, hasName = false}) {
+    const dispatch = useDispatch();
+    const router = useRouter();
     const ref = useRef();
     const [anchorEl, setAnchorEl] = useState(null);
-
-    const handleHover = (event) => {
+    const {_id} = movie;
+    const onMovieClick = async (event) => {
+        if(hasName){
+            await handleClick();
+            return;
+        }
         setAnchorEl(event.target);
     }
 
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    async function handleClick() {
+        await dispatch(setSearchString(''))
+        handleClose();
+        await router.push(`/movie/${_id}`);
+    }
 
     const open = Boolean(anchorEl);
     const id = open ? 'simple-itemPopover' : undefined;
@@ -26,9 +43,12 @@ export default function ItemPopover({item, hasPlayer = true, hasName = false}) {
         >
             <div
                 className={styles.carouselWrapper}
-                onClick={handleHover}
+                onClick={onMovieClick}
             >
-                <CarouselItem item={item}/>
+                <CarouselItem
+                    movie={movie}
+                    hasName={hasName}
+                />
             </div>
             <Popover
                 id={id}
@@ -46,10 +66,10 @@ export default function ItemPopover({item, hasPlayer = true, hasName = false}) {
             >
                 <div className={styles.box} onMouseLeave={handleClose} ref={ref}>
                     <HoveredMovie
-                        item={item}
+                        movie={movie}
                         hasPlayer={hasPlayer}
                         hasName={hasName}
-                        handleClose={handleClose}>
+                        handleClick={handleClick}>
                     </HoveredMovie>
                 </div>
             </Popover>

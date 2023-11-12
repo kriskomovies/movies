@@ -1,22 +1,10 @@
-import {useRouter} from "next/router";
-import {useDispatch} from "react-redux";
 import ReactPlayer from 'react-player/youtube';
 import PlayCircleFilledOutlinedIcon from '@mui/icons-material/PlayCircleFilledOutlined';
-import {setSearchString} from "@/slices/searchSlice";
 
 import styles from "./hoveredMovie.module.scss";
 
-export default function HoveredMovie({item, hasPlayer, hasName, handleClose}) {
-    const dispatch = useDispatch();
-    const router = useRouter();
-    const {_id, name, trailer, episode} = item;
-
-    async function handleClick() {
-        await dispatch(setSearchString(''))
-        handleClose();
-        await router.push(`/movie/${_id}`);
-    }
-
+export default function HoveredMovie({movie, hasPlayer, hasName, handleClick}) {
+    const {name, trailer, episode} = movie;
     return (
         <div className={styles.itemWrapper}>
             {

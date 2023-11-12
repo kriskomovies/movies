@@ -1,8 +1,9 @@
-import {useRouter} from "next/router";
 import {useEffect, useRef, useState} from "react";
+import {useRouter} from "next/router";
 import {useDispatch} from "react-redux";
 import {setSearchString} from "@/slices/searchSlice";
-import {Button, Popover} from "@mui/material";
+import Button from "@mui/material/Button";
+import Popover from "@mui/material/Popover";
 import axios from 'axios';
 
 import styles from "./genresDropdown.module.scss";

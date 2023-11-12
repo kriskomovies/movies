@@ -1,11 +1,18 @@
 import {useState} from "react";
-import {Button, TextField, FormControl, InputLabel, Select, MenuItem} from "@mui/material";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import {Alert, Snackbar} from "@mui/material";
 import {ANIME, MOVIE, SERIE} from "@/constants/moviesTypes";
 import axios from "axios";
 import {EMPTY_STRING} from "@/lib/helpers";
 import {isMovieOkForDb} from "@/lib/movies";
 
 import styles from "./createMovie.module.scss";
+
 
 
 const initialFormData = {
@@ -26,12 +33,29 @@ const initialFormData = {
     voePlayer: EMPTY_STRING
 };
 
+const success = "success";
+const error = "error"
+
 function CreateMovie(props) {
     const [search, setSearch] = useState(EMPTY_STRING);
     const [formData, setFormData] = useState(initialFormData);
+    const [open, setOpen] = useState(false);
+    const [severity, setSeverity] = useState(success);
+    const [message, setMessage] = useState("Movie created successfully.");
 
     const isAddMovieEnabled = () => {
         return isMovieOkForDb(formData);
+    };
+
+    const handleClick = () => {
+        setOpen(true);
+    };
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false);
     };
 
     async function handleChange(event) {
@@ -57,9 +81,20 @@ function CreateMovie(props) {
 
     async function handleSubmit(event) {
         event.preventDefault();
-        const response = await axios.post(`/api/movie/?searchTerm=${search}`, formData);
+        try {
+            const response = await axios.post(`/api/movie/?searchTerm=${search}`, formData);
+            const {type} = formData;
+            if(type === MOVIE ){
+                setFormData(initialFormData);
+            }
+        } catch (err) {
+            const {message} = err?.response?.data;
+            setMessage(`Movie failed to be created: ${message}`);
+            setSeverity(error);
+        }
+        setOpen(true);
     }
-    
+
     return (
         <div className={styles.container}>
             <form onSubmit={handleSubmit}>
@@ -223,6 +258,11 @@ function CreateMovie(props) {
                     <img src={formData.poster} alt={'Poster'}/>
                 </div>
             </div>
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity={severity} sx={{width: '100%'}}>
+                    {message}
+                </Alert>
+            </Snackbar>
         </div>
     );
 }

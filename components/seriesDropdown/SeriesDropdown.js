@@ -1,5 +1,6 @@
 import {useRef, useState} from "react";
-import {Button, Popover} from "@mui/material";
+import Popover from "@mui/material/Popover";
+import Button from "@mui/material/Button";
 
 import styles from "./seriesDropdown.module.scss";
 
@@ -51,7 +52,7 @@ export default function SeriesDropdown({seasons, currentSeason, handleSeasonSele
                 open={open}
                 anchorEl={anchorEl}
                 onClose={handleClose}
-                disableScrollLock={ true }
+                disableScrollLock={true}
                 anchorOrigin={{
                     vertical: 'bottom',
                     horizontal: 'left',
