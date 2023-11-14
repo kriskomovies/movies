@@ -25,12 +25,12 @@ function MovieDetailPage({movie, episodes, seasons}) {
         <div className={styles.movieDetailsWrapper}>
             <div className={styles.moviePlayerWrapper}>
                 <div className={styles.moviePlayer}>
-                    {/*<iframe*/}
-                    {/*    allowFullScreen={true}*/}
-                    {/*    src={vidPlayer}*/}
-                    {/*    width="100%"*/}
-                    {/*    height="100%"*/}
-                    {/*/>*/}
+                    <iframe
+                        allowFullScreen={true}
+                        src={vidPlayer}
+                        width="100%"
+                        height="100%"
+                    />
                 </div>
             </div>
             <div className={styles.movieName}>
