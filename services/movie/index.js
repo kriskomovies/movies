@@ -42,7 +42,7 @@ export async function getMovieById(id) {
 
 export async function getMovieDetailsFromAPI(movieName) {
     const response = await axios.get(`http://www.omdbapi.com/?apikey=746c3a95&t=${movieName}`);
-    const {Title, Plot, Year, Genre, Actors, Poster, imdbRating} = response.data;
+    const {Title, Plot, Year, Genre, Actors, Poster, imdbRating, imdbID} = response.data;
     const movie = {
         name: Title,
         poster: Poster,
@@ -50,13 +50,16 @@ export async function getMovieDetailsFromAPI(movieName) {
         genres: Genre,
         actors: Actors,
         imdbRating,
-        year: parseYear(Year)
+        imdbID,
+        year: parseYear(Year),
+
     }
     return movie;
 }
 
 
 //-----------------------------FUNCTIONS-------------------------------------
+
 async function enrichSeriesAndAnimes(movie) {
     const {type, _id, season, name} = movie;
     if (type !== MOVIE) {

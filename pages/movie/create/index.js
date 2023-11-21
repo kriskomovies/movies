@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
@@ -43,6 +43,14 @@ function CreateMovie(props) {
     const [severity, setSeverity] = useState(success);
     const [message, setMessage] = useState("Movie created successfully.");
 
+    const {episode, season, type, imdbID} = formData;
+
+    useEffect(() => {
+        if(imdbID){
+            const vidPlayer = getVidPlayer(type, imdbID, season, episode)
+            setFormData({...formData, vidPlayer})
+        }
+    }, [episode, season, type])
     const isAddMovieEnabled = () => {
         return isMovieOkForDb(formData);
     };
@@ -76,9 +84,22 @@ function CreateMovie(props) {
     async function handleSearchClick() {
         const response = await axios.get(`/api/movie/?searchTerm=${search}`);
         const {movie} = response.data;
-        setFormData({...formData, ...movie})
+        const {imdbID} = movie;
+        const vidPlayer = getVidPlayer(formData.type, imdbID);
+        setFormData({...formData, ...movie, vidPlayer})
     }
 
+    function getVidPlayer(type, imdbID, season = 1, episode = 1 ) {
+        switch (type){
+            case MOVIE:
+                return `https://vidsrc.to/embed/movie/${imdbID}`
+            case SERIE:
+                return `https://vidsrc.to/embed/tv/${imdbID}/${season}/${episode}`
+            default: {
+                return ""
+            }
+        }
+    }
     async function handleSubmit(event) {
         event.preventDefault();
         try {
@@ -86,6 +107,7 @@ function CreateMovie(props) {
             const {type} = formData;
             if(type === MOVIE ){
                 setFormData(initialFormData);
+                setSearch("");
             }
         } catch (err) {
             const {message} = err?.response?.data;
@@ -258,7 +280,7 @@ function CreateMovie(props) {
                     <img src={formData.poster} alt={'Poster'}/>
                 </div>
             </div>
-            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+            <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
                 <Alert onClose={handleClose} severity={severity} sx={{width: '100%'}}>
                     {message}
                 </Alert>
