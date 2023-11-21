@@ -88,7 +88,7 @@ export async function getSeriesBySeason(name, season) {
 }
 
 export async function getMoviesByType(type = MOVIE, page = 1) {
-    const moviesTakeCount = 30;
+    const moviesTakeCount = 32;
     const skip = (page - 1) * moviesTakeCount;
     const query = getTypeQuery(type);
 
