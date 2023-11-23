@@ -1,11 +1,9 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {getMoviesByGenre} from "@/services/movies";
-import MoviesGrid from "@/components/moviesGrid/MoviesGrid";
 import {useGetMoviesByGenreQuery} from "@/slices/moviesGridApi";
-
-import styles from "./genreId.module.scss";
 import MoviesGridWrapper from "@/components/moviesGridWrapper/MoviesGridWrapper";
 
+import styles from "./genreId.module.scss";
 
 function MoviesByGenre({serverMovies, totalCount, genreId}) {
     const [page, setPage] = useState(1);

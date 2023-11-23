@@ -7,8 +7,6 @@ import CloseIcon from "@mui/icons-material/Close";
 import {EMPTY_STRING} from "@/lib/helpers";
 
 import styles from "./search.module.scss";
-
-
 export default function SearchComponent(props) {
     const searchString = useSelector(selectSearchString);
     const dispatch = useDispatch();
@@ -17,6 +15,7 @@ export default function SearchComponent(props) {
     if (isLoading) {
         return <Loader/>
     }
+
     const {movies} = data;
 
     const fetchMore = () => {
@@ -24,19 +23,23 @@ export default function SearchComponent(props) {
     }
 
     const handleClose = () => {
-        dispatch(setSearchString(""));
+        setTimeout(() => {
+            dispatch(setSearchString(""));
+        }, 500)
     }
 
+    const moviesFound = movies.length === 0;
     return (
         <div className={styles.container}>
             <div className={styles.containerHeader}>
-                {movies.length === 0 ?
-                    <div>
-                        <h2> No results found</h2>
-                    </div> :
-                    <div>
-                        <h2>Search results for: {searchString}</h2>
-                    </div>
+                {
+                    moviesFound ?
+                        <div>
+                            <h2> No results found</h2>
+                        </div> :
+                        <div>
+                            <h2>Search results for: {searchString}</h2>
+                        </div>
                 }
                 <CloseIcon className={styles.closeIcon} onClick={handleClose}/>
             </div>
