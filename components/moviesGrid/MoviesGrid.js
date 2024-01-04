@@ -5,6 +5,7 @@ import styles from "./moviesGrid.module.scss";
 
 export default function MoviesGrid({movies, totalCount, fetchData}) {
     const hasMore = totalCount - movies.length > 0;
+
     return (
         <div className={styles.container} >
             <InfiniteScroll
@@ -13,9 +14,9 @@ export default function MoviesGrid({movies, totalCount, fetchData}) {
                 next={fetchData}
                 hasMore={hasMore}
             >
-                {movies.map((movie) => (
+                {movies.map((movie, index) => (
                     <ItemPopover
-                        key={movie._id}
+                        key={`${movie._id}+${index}`}
                         movie={movie}
                     />
                 ))}

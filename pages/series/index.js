@@ -1,13 +1,13 @@
-import {useEffect, useState} from "react";
-import {getMoviesByType} from "@/services/movies";
+import {useState} from "react";
 import {useGetMoviesByTypeQuery} from "@/slices/moviesGridApi";
+import styles from "@/pages/movies/movies.module.scss";
 import MoviesGridWrapper from "@/components/moviesGridWrapper/MoviesGridWrapper";
-import {MOVIE} from "@/constants/moviesTypes";
-import styles from "./movies.module.scss"
+import {SERIE} from "@/constants/moviesTypes";
+import {getMoviesByType} from "@/services/movies";
 
-export default function Movies({serverMovies, totalCount}) {
+export default function Series({serverMovies, totalCount}) {
     const [page, setPage] = useState(1);
-    const type = MOVIE;
+    const type = SERIE;
     const getMore = useGetMoviesByTypeQuery({type, page}, {skip: page === 1});
 
     return (
@@ -26,7 +26,7 @@ export default function Movies({serverMovies, totalCount}) {
 }
 
 export async function getStaticProps(context) {
-    const {movies, totalCount} = await getMoviesByType(MOVIE);
+    const {movies, totalCount} = await getMoviesByType(SERIE);
     return {
         props: {
             serverMovies: JSON.parse(JSON.stringify(movies)),

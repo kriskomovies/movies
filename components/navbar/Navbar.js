@@ -11,9 +11,9 @@ export default function Navbar() {
     const router = useRouter();
     const {type} = router.query;
 
-    const moviesURI = `/movies?type=${MOVIE}`
-    const seriesURI = `/movies?type=${SERIE}`
-    const animesURI = `/movies?type=${ANIME}`
+    const moviesURI = '/movies'
+    const seriesURI = '/series'
+    const animesURI = '/animes'
 
     return (
         <div className={styles.navbar}>
