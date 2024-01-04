@@ -30,8 +30,8 @@ export async function getStaticProps(context) {
     return {
         props: {
             serverMovies: JSON.parse(JSON.stringify(movies)),
-            totalCount: JSON.parse(JSON.stringify(totalCount)),
-            revalidate: 60
-        }
+            totalCount: JSON.parse(JSON.stringify(totalCount))
+        },
+        revalidate: 60
     }
 }
