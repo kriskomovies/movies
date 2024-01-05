@@ -22,15 +22,9 @@ export default function HoveredMovie({movie, hasPlayer, hasName, handleClick}) {
                     onClick={handleClick}
                 />
                 <div className={styles.movieName}>
-                    <h2>{name}</h2>
+                    {name}
                 </div>
             </div>
-            {
-                hasName &&
-                <div className={styles.textDescription}>
-                    <h2>Episode : {episode}</h2>
-                </div>
-            }
         </div>
     )
 }

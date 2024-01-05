@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router'
+import {useRouter} from 'next/router'
 import axios from "axios";
 import {getMovieById} from "@/services/movie";
 import {MoviePlayer} from "@/components/moviePlayer/MoviePlayer";
@@ -10,10 +10,9 @@ import {moviesSliderSettings} from "@/lib/settings";
 import styles from "./movie.module.scss";
 
 
-
 function MovieDetailPage({movie, episodes, seasons}) {
     const router = useRouter();
-    const {name, description, poster, genres, season, episode, vidPlayer} = movie;
+    const {name, description, poster, genres, season, episode, vidPlayer, episodeName} = movie;
 
     async function handleSeasonSelect(season) {
         const response = await axios.get(`/api/serie/?name=${name}&season=${season}`);
@@ -35,9 +34,18 @@ function MovieDetailPage({movie, episodes, seasons}) {
             </div>
             <div className={styles.movieName}>
                 <h1>{name}</h1>
-                {season > 0 && <h2>Season : {season} - Episode : {episode}</h2>}
-                {season > 0 &&
-                    <SeriesDropdown seasons={seasons} currentSeason={season} handleSeasonSelect={handleSeasonSelect}/>}
+                {
+                    season > 0 &&
+                    <>
+                        <h2> {episodeName} </h2>
+                        <h2> Season : {season} - Episode : {episode}</h2>
+                        <SeriesDropdown
+                            seasons={seasons}
+                            currentSeason={season}
+                            handleSeasonSelect={handleSeasonSelect}
+                        />
+                    </>
+                }
             </div>
             <div className={styles.moviePlayers}>
                 <MoviePlayer playerNumber={1}/>
@@ -64,9 +72,6 @@ function MovieDetailPage({movie, episodes, seasons}) {
                     </Carousel>
                 </div>
             }
-            {/*<h2>SIMILAR MOVIES</h2>*/}
-            {/*<div className={styles.similarMoviesSection}>*/}
-            {/*</div>*/}
         </div>
     )
 }

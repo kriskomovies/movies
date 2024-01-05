@@ -1,7 +1,7 @@
 import styles from "./carouselItem.module.scss";
 
 export default function CarouselItem({movie, hasName}) {
-    const {poster, episode} = movie;
+    const {poster, episode, episodeName} = movie;
 
     return (
         <div className={styles.container}>
@@ -11,7 +11,10 @@ export default function CarouselItem({movie, hasName}) {
             {
                 hasName &&
                 <div className={styles.movieName}>
-                    <h2>Episode: {episode}</h2>
+                    <div className={styles.episodeName}>
+                        <div className={styles.episodeParts}>Episode : {episode}</div>
+                        {episodeName &&  <div className={styles.episodeParts} >{episodeName}</div>}
+                    </div>
                 </div>
             }
         </div>

@@ -1,9 +1,10 @@
 import {useState} from "react";
 import {useGetMoviesByTypeQuery} from "@/slices/moviesGridApi";
-import styles from "@/pages/movies/movies.module.scss";
 import MoviesGridWrapper from "@/components/moviesGridWrapper/MoviesGridWrapper";
 import {SERIE} from "@/constants/moviesTypes";
 import {getMoviesByType} from "@/services/movies";
+
+import styles from "./series.module.scss";
 
 export default function Series({serverMovies, totalCount}) {
     const [page, setPage] = useState(1);

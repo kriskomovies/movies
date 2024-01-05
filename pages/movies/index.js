@@ -1,8 +1,9 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {getMoviesByType} from "@/services/movies";
 import {useGetMoviesByTypeQuery} from "@/slices/moviesGridApi";
 import MoviesGridWrapper from "@/components/moviesGridWrapper/MoviesGridWrapper";
 import {MOVIE} from "@/constants/moviesTypes";
+
 import styles from "./movies.module.scss"
 
 export default function Movies({serverMovies, totalCount}) {
