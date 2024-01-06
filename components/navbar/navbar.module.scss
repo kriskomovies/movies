@@ -31,6 +31,12 @@
     .activeLink {
       color: $colors-base-red !important;
     }
+
+    .navLinks{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
   }
 
   .dropDown {
@@ -63,6 +69,17 @@
 
     .activeLink {
 
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .navLinks{
+    display: flex !important;
+    flex-direction: column !important;
+
+    div{
+      margin: 4px 1px;
     }
   }
 }
