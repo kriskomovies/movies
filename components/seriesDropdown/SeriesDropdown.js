@@ -10,7 +10,10 @@ export default function SeriesDropdown({seasons, currentSeason, handleSeasonSele
     const ref = useRef();
 
     function handleClick(event) {
-        setAnchorEl(event.currentTarget);
+        if (seasons.length > 1) {
+            setAnchorEl(event.currentTarget);
+        }
+
     }
 
     function handleClose() {

@@ -21,7 +21,7 @@
   display: grid;
   grid-template-columns: 1fr;
   background-color: $color-base-grey;
-  height: 150px;
+  max-height: 200px;
   width: 300px;
   overflow: auto;
 
