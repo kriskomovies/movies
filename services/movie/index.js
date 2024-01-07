@@ -8,19 +8,31 @@ import axios from "axios";
 
 
 export async function createMovie(movie) {
+    const polishedMovie = await polishMovieBeforeUpdate(movie);
+    polishedMovie.actors = convertToActorsArray(movie.actors);
+    await checkForExistingMovie(polishedMovie);
+    const newMovie = await new Movies(polishedMovie);
+    return newMovie.save();
+}
+
+export async function editMovie(movie) {
+    const polishedMovie = await polishMovieBeforeUpdate(movie);
+    const updatedMovie = await Movies.findByIdAndUpdate(polishedMovie._id, polishedMovie, {new: true});
+    return updatedMovie;
+}
+
+async function polishMovieBeforeUpdate(movie) {
     await dbConnect();
     const genrePromises = movie
         .genres.split(',')
+        .filter(genre => genre.trim() !== '')
         .map(async (genre) => {
             const dbGenre = await createGenre(genre.trim());
             return dbGenre._id;
         })
     const createdGenres = await Promise.all(genrePromises);
     movie.genres = createdGenres;
-    movie.actors = convertToActorsArray(movie.actors);
-    await checkForExistingMovie(movie);
-    const newMovie = await new Movies(movie);
-    return newMovie.save();
+    return movie;
 }
 
 export async function getMovieById(id) {
@@ -57,13 +69,32 @@ export async function getMovieDetailsFromAPI(movieName) {
     return movie;
 }
 
+export async function getCleanMovieById(id) {
+    await dbConnect();
+    const movie = await Movies
+        .findById(id)
+        .populate('genres', 'name')
+        .lean();
+
+    const genres = movie.genres.reduce((acc, genre, currentIndex) => {
+        acc = acc + `${genre.name}`
+        if(currentIndex !== movie.genres.length - 1){
+            acc = acc + ","
+        }
+
+        return acc;
+    }, "")
+
+    movie.genres = genres;
+    return movie;
+}
 
 //-----------------------------FUNCTIONS-------------------------------------
 
 async function enrichSeriesAndAnimes(movie) {
     const {type, _id, season, name} = movie;
     if (type !== MOVIE) {
-        const episodes =  await Movies
+        const episodes = await Movies
             .aggregate([
                 {
                     $match: {
@@ -79,7 +110,7 @@ async function enrichSeriesAndAnimes(movie) {
             ])
             .exec();
 
-        const seasons = await Movies.distinct('season', { type, name, season: { $ne: 0 } }).exec();
+        const seasons = await Movies.distinct('season', {type, name, season: {$ne: 0}}).exec();
 
         return {
             episodes,

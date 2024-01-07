@@ -1,19 +1,20 @@
 import {useEffect, useState} from "react";
-import Button from "@mui/material/Button";
+import {EMPTY_STRING} from "@/lib/helpers";
+import {isMovieOkForDb} from "@/lib/movies";
+import axios from "axios";
+import {ANIME, MOVIE, SERIE} from "@/constants/moviesTypes";
 import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import {Alert, Snackbar} from "@mui/material";
-import {ANIME, MOVIE, SERIE} from "@/constants/moviesTypes";
-import axios from "axios";
-import {EMPTY_STRING} from "@/lib/helpers";
-import {isMovieOkForDb} from "@/lib/movies";
 
-import styles from "./createMovie.module.scss";
+import styles from "./editMovie.module.scss";
 
 const initialFormData = {
+    _id: EMPTY_STRING,
     name: EMPTY_STRING,
     description: EMPTY_STRING,
     trailer: EMPTY_STRING,
@@ -34,12 +35,13 @@ const initialFormData = {
 const success = "success";
 const error = "error"
 
-function CreateMovie(props) {
+
+function EditMovie(props){
     const [search, setSearch] = useState(EMPTY_STRING);
     const [formData, setFormData] = useState(initialFormData);
     const [open, setOpen] = useState(false);
     const [severity, setSeverity] = useState(success);
-    const [message, setMessage] = useState("Movie created successfully.");
+    const [message, setMessage] = useState("Movie edited successfully.");
 
     const {episode, season, type, imdbID} = formData;
 
@@ -80,11 +82,10 @@ function CreateMovie(props) {
     }
 
     async function handleSearchClick() {
-        const response = await axios.get(`/api/movie/?searchTerm=${search}`);
+        const response = await axios.get(`/api/movie/search/?id=${search}`);
         const {movie} = response.data;
-        const {imdbID} = movie;
-        const vidPlayer = getVidPlayer(formData.type, imdbID);
-        setFormData({...formData, ...movie, vidPlayer})
+        console.log("movie", movie)
+        setFormData({...movie})
     }
 
     function getVidPlayer(type, imdbID, season = 1, episode = 1 ) {
@@ -101,7 +102,7 @@ function CreateMovie(props) {
     async function handleSubmit(event) {
         event.preventDefault();
         try {
-            const response = await axios.post(`/api/movie/?searchTerm=${search}`, formData);
+            const response = await axios.put(`/api/movie/`, formData);
             const {type} = formData;
             if(type === MOVIE ){
                 setFormData(initialFormData);
@@ -109,7 +110,7 @@ function CreateMovie(props) {
             }
         } catch (err) {
             const {message} = err?.response?.data;
-            setMessage(`Movie failed to be created: ${message}`);
+            setMessage(`Movie failed to be edited: ${message}`);
             setSeverity(error);
         }
         setOpen(true);
@@ -202,7 +203,7 @@ function CreateMovie(props) {
                     style={{margin: '10px'}}
                     disabled={!isAddMovieEnabled()}
                 >
-                    Add movie to database
+                    Edit movie
                 </Button>
             </form>
             <div className={styles.searchContainer}>
@@ -278,7 +279,12 @@ function CreateMovie(props) {
                     <img src={formData.poster} alt={'Poster'}/>
                 </div>
             </div>
-            <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+            <Snackbar
+                className={styles.snackBar}
+                open={open}
+                autoHideDuration={3000}
+                onClose={handleClose}
+            >
                 <Alert onClose={handleClose} severity={severity} sx={{width: '100%'}}>
                     {message}
                 </Alert>
@@ -287,5 +293,4 @@ function CreateMovie(props) {
     );
 }
 
-
-export default CreateMovie;
+export default EditMovie;
