@@ -1,5 +1,6 @@
 import {useRouter} from "next/router";
 import Link from "next/link";
+import Image from "next/image";
 import GenresDropdown from "@/components/genres/GenresDropdown";
 import SearchBar from "@/components/searchBar/SearchBar";
 import {ANIME, MOVIE, SERIE} from "@/constants/moviesTypes";
@@ -7,6 +8,7 @@ import {setSearchString} from "@/slices/searchSlice";
 import {useDispatch} from "react-redux";
 
 import styles from "./navbar.module.scss";
+
 
 export default function Navbar() {
     const router = useRouter();

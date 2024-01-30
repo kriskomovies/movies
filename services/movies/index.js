@@ -3,33 +3,33 @@ import {Movies, Genres} from "@/models"
 import dbConnect from "@/lib/dbConnect";
 import {getGenreQuery, getTypeQuery} from "@/lib/queries";
 
-// export async function getAllMovies() {
-//     try {
-//         await dbConnect();
-//         const query = {
-//             $or: [
-//                 {type: MOVIE},
-//                 {type: SERIE, season: 1, episode: 1},
-//                 {type: ANIME, season: 1, episode: 1}
-//             ]
-//         };
-//
-//         const movies = await Movies.find(query)
-//             .populate('types', 'name _id types')
-//             .lean()
-//             .limit(20)
-//
-//         const totalCount = await Movies.countDocuments(query);
-//         return {
-//             movies,
-//             totalCount
-//         }
-//     } catch (err) {
-//         console.log(`Error getAllMovies: ${err.toString()}`);
-//         return [];
-//     }
-//
-// }
+export async function getAllMovies() {
+    try {
+        await dbConnect();
+        const query = {
+            $or: [
+                {type: MOVIE},
+                {type: SERIE, season: 1, episode: 1},
+                {type: ANIME, season: 1, episode: 1}
+            ]
+        };
+
+        const movies = await Movies.find(query)
+            .populate('genres', 'name _id')
+            .limit(100)
+            .lean();
+
+        const totalCount = await Movies.countDocuments(query);
+        return {
+            movies,
+            totalCount
+        }
+    } catch (err) {
+        console.log(`Error getAllMovies: ${err.toString()}`);
+        return [];
+    }
+
+}
 
 export async function getBySearch(searchString) {
     await dbConnect();
