@@ -29,6 +29,7 @@ function MovieDetailPage({movie, episodes, seasons}) {
                         src={vidPlayer}
                         width="100%"
                         height="100%"
+                        className={styles.iFrame}
                     />
                 </div>
             </div>
