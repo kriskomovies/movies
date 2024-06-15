@@ -10,6 +10,7 @@ export default function WrapperComponent({Component, pageProps}) {
     return (
         <Fragment>
             <Navbar/>
+            <div className={styles.backgroundImage}></div>
             <div className={styles.container}>
                 {searchString ?
                     <SearchComponent/> :
