@@ -13,7 +13,6 @@ export default function SeriesDropdown({seasons, currentSeason, handleSeasonSele
         if (seasons.length > 1) {
             setAnchorEl(event.currentTarget);
         }
-
     }
 
     function handleClose() {

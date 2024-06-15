@@ -8,8 +8,6 @@ import HoveredMovie from "@/components/hoveredMovie/HoveredMovie";
 
 import styles from "./itemPopover.module.scss";
 
-
-
 export default function ItemPopover({movie, hasPlayer = true, hasName = false}) {
     const dispatch = useDispatch();
     const router = useRouter();

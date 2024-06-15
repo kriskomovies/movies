@@ -1,5 +1,5 @@
 import ReactPlayer from 'react-player/youtube';
-import PlayCircleFilledOutlinedIcon from '@mui/icons-material/PlayCircleFilledOutlined';
+import MoviesButton from "@/components/moveisButton/moviesButton";
 
 import styles from "./hoveredMovie.module.scss";
 
@@ -16,14 +16,9 @@ export default function HoveredMovie({movie, hasPlayer, hasName, handleClick}) {
                     controls={true}
                 />
             }
+            <hr/>
             <div className={styles.movieDescription}>
-                <PlayCircleFilledOutlinedIcon
-                    className={styles.playIcon}
-                    onClick={handleClick}
-                />
-                <div className={styles.movieName}>
-                    {name}
-                </div>
+                <MoviesButton text="PLAY NOW" iconName="fa-solid fa-play" onClick={handleClick}/>
             </div>
         </div>
     )

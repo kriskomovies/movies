@@ -36,7 +36,17 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-left: 60px;
+
+      a {
+        font-size: 20px;
+        font-weight: 700;
+      }
     }
+  }
+
+  img {
+    margin-left: 25px;
   }
 
   .dropDown {
