@@ -1,9 +1,7 @@
 import {useRouter} from "next/router";
 import Link from "next/link";
-import Image from "next/image";
 import GenresDropdown from "@/components/genres/GenresDropdown";
 import SearchBar from "@/components/searchBar/SearchBar";
-import {ANIME, MOVIE, SERIE} from "@/constants/moviesTypes";
 import {setSearchString} from "@/slices/searchSlice";
 import {useDispatch} from "react-redux";
 
@@ -13,7 +11,7 @@ import styles from "./navbar.module.scss";
 export default function Navbar() {
     const router = useRouter();
     const dispatch = useDispatch();
-    const {type} = router.query;
+    const { pathname } = router;
 
     const moviesURI = '/movies'
     const seriesURI = '/series'
@@ -34,19 +32,19 @@ export default function Navbar() {
                         <div>
                             <Link
                                 onClick={resetSearch} href={moviesURI}
-                                className={type === MOVIE ? styles.activeLink : ''}>Movies
+                                className={pathname === moviesURI ? styles.activeLink : ''}>Movies
                             </Link>
                         </div>
                         <div>
                             <Link
                                 onClick={resetSearch} href={seriesURI}
-                                className={type === SERIE ? styles.activeLink : ''}>Series
+                                className={pathname === seriesURI ? styles.activeLink : ''}>Series
                             </Link>
                         </div>
                         <div>
                             <Link
                                 onClick={resetSearch} href={animesURI}
-                                className={type === ANIME ? styles.activeLink : ''}>Animes
+                                className={pathname === animesURI ? styles.activeLink : ''}>Animes
                             </Link>
                         </div>
                     </div>

@@ -1,18 +1,62 @@
 @import '@/styles/variables';
 
 .container {
+  border: 2px solid $colors-base-red-darker;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   cursor: pointer;
+  position: relative;
 
   .imageContainer {
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     width: 250px;
     height: 300px;
+    transition: all 0.3s ease, all 0.3s ease;
 
+    &:hover {
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8);
+      filter: blur(5px);
+      transform: translateY(-3px);
+    }
     .img {
       width: 100%;
       height: 100%;
+      border-radius: 10px;
+    }
+  }
+
+  .carouselHoverContent {
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 250px;
+    border-radius: 10px;
+    position: absolute;
+    text-align: center;
+    opacity: 0;
+    color: $colors-base-red;
+    padding: 10px 0;
+
+    .hoverMovieName {
+      font-size: 32px;
+      margin-bottom: 10px;
+      text-overflow: ellipsis;
+    }
+    hr {
+      width: 80%;
+    }
+    .hoverMovieRating {
+      font-size: 18px;
+      span {
+        font-weight: 800;
+        margin-left: 8px;
+      }
+    }
+    &:hover {
+      // here
+
     }
   }
 
@@ -34,6 +78,9 @@
         color: $color-cream-text;
       }
     }
+  }
 
+  &:hover .carouselHoverContent {
+    opacity: 1;
   }
 }
