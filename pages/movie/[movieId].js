@@ -1,13 +1,13 @@
 import {useRouter} from 'next/router'
 import axios from "axios";
 import {getMovieById} from "@/services/movie";
-import {MoviePlayer} from "@/components/moviePlayer/MoviePlayer";
 import {MovieTag} from "@/components/movieTag/MovieTag";
 import Carousel from "@/components/carousel/Carousel";
 import SeriesDropdown from "@/components/seriesDropdown/SeriesDropdown";
 import {moviesSliderSettings} from "@/lib/settings";
 
 import styles from "./movie.module.scss";
+import MoviesButton from "@/components/moveisButton/moviesButton";
 
 
 function MovieDetailPage({movie, episodes, seasons}) {
@@ -49,9 +49,9 @@ function MovieDetailPage({movie, episodes, seasons}) {
                 }
             </div>
             <div className={styles.moviePlayers}>
-                <MoviePlayer playerNumber={1}/>
-                <MoviePlayer playerNumber={2}/>
-                <MoviePlayer playerNumber={3}/>
+                <MoviesButton text="Player 1" iconName="fa-solid fa-circle-play"/>
+                <MoviesButton text="Player 2" iconName="fa-solid fa-circle-play"/>
+                <MoviesButton text="Player 3" iconName="fa-solid fa-circle-play"/>
             </div>
             <h2>MOVIE DETAILS</h2>
             <div className={styles.movieDetails}>

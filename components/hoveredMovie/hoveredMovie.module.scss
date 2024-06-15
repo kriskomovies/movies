@@ -6,6 +6,11 @@
   flex-direction: column;
   border-radius: 20px;
 
+  hr {
+    border: none;
+    border-top: 2px solid $colors-base-red-darker;
+    width: 100%;
+  }
   .video {
     max-width: 100%;
     max-height: 100%;
@@ -14,6 +19,7 @@
   .movieDescription {
     display: flex;
     align-items: center;
+    justify-content: center;
     margin: 15px;
 
     .playIcon {

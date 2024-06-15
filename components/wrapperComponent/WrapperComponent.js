@@ -4,11 +4,13 @@ import {useSelector} from "react-redux";
 import {selectSearchString} from "@/slices/searchSlice";
 import SearchComponent from "@/components/searchComponent/SearchComponent";
 import styles from "./wrapperComponent.module.scss"
+import ResumeWatchingTopBar from "@/components/resumeWatchingTopBar/resumeWatchingTopBar";
 
 export default function WrapperComponent({Component, pageProps}) {
     const searchString = useSelector(selectSearchString);
     return (
         <Fragment>
+            {/*<ResumeWatchingTopBar />*/}
             <Navbar/>
             <div className={styles.backgroundImage}></div>
             <div className={styles.container}>

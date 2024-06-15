@@ -4,6 +4,7 @@ import GenresDropdown from "@/components/genres/GenresDropdown";
 import SearchBar from "@/components/searchBar/SearchBar";
 import {setSearchString} from "@/slices/searchSlice";
 import {useDispatch} from "react-redux";
+import { Select, MenuItem, FormControl, InputLabel } from "@mui/material";
 
 import styles from "./navbar.module.scss";
 
@@ -32,19 +33,19 @@ export default function Navbar() {
                         <div>
                             <Link
                                 onClick={resetSearch} href={moviesURI}
-                                className={pathname === moviesURI ? styles.activeLink : ''}>Movies
+                                className={pathname === moviesURI ? styles.activeLink : ''}>MOVIES
                             </Link>
                         </div>
                         <div>
                             <Link
                                 onClick={resetSearch} href={seriesURI}
-                                className={pathname === seriesURI ? styles.activeLink : ''}>Series
+                                className={pathname === seriesURI ? styles.activeLink : ''}>SERIES
                             </Link>
                         </div>
                         <div>
                             <Link
                                 onClick={resetSearch} href={animesURI}
-                                className={pathname === animesURI ? styles.activeLink : ''}>Animes
+                                className={pathname === animesURI ? styles.activeLink : ''}>ANIMES
                             </Link>
                         </div>
                     </div>
